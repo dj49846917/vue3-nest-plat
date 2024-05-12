@@ -1,6 +1,18 @@
 # vue3-nest-plat
 使用vue3+nestjs的一个后台管理系统
 
+# 项目启动
+  * 启动前端项目：
+    ```
+      cd frontend
+      npm run dev
+    ```
+  * 启动后端项目:
+    ```
+      cd backend
+      npm run start:dev
+    ```
+
 # 介绍
   * 使用vue3 + vite4 + ts + Nestjs + 无界微前端
   * 从0到1全栈开发一个管理后台项目
