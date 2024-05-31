@@ -1,9 +1,11 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Post } from '@nestjs/common';
+import { Public } from 'src/guard/auth/public.decorator';
 
 @Controller('auth')
 export class AuthController {
-    @Get()
-    getData() {
-        return "22211"
+    @Public()
+    @Post("login")
+    login() {
+        return "auth";
     }
 }
