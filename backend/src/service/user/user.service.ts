@@ -49,4 +49,8 @@ export class UserService {
     this.userTable.merge(user, newUser);
     return this.userTable.save(user);
   }
+  // 根据username查询
+  findByUsername(username: string):Promise<User> {
+    return this.userTable.findOneBy({username})
+  }
 }
