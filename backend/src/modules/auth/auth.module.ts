@@ -4,13 +4,23 @@ import { AuthService } from 'src/service/auth/auth.service';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from 'src/guard/auth/auth.guard';
 import { UserModule } from '../user/user.module';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
-  imports: [UserModule],
+  imports: [
+    UserModule,
+    JwtModule.register({
+      global: true,
+      secret: 'abcdefg', // 私钥(约定好)
+      signOptions: { 
+        expiresIn: 24 * 60 * 60 + 's' // 过期时间
+      }
+    })
+  ],
   controllers: [AuthController],
   providers: [AuthService, {
     provide: APP_GUARD,
     useClass: AuthGuard
   }]
 })
-export class AuthModule {}
+export class AuthModule { }
