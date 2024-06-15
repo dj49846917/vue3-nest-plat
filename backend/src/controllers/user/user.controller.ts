@@ -1,10 +1,17 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, Req } from '@nestjs/common';
 import { UserService } from 'src/service/user/user.service';
 import { UserDto, UserTable } from 'src/type';
+import { wrapperResponse } from 'src/utils';
 
 @Controller('user')
 export class UserController {
   constructor(private readonly UserService: UserService){}
+
+  @Get("info")
+  getUserByToken(@Req() request) {
+    // 前面gurad使用了request['user']=payload,这里就可以直接用request.user拿到token解析后的userinfo
+    return wrapperResponse(this.UserService.findByUsername(request.user.username), "获取用户信息成功");
+  }
 
   @Get("/:id")
   // ParseIntPipe表示将id转换为int类型
